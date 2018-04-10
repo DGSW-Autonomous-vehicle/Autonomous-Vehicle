@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Discover existing channels
+channels=$(find /usr/bin/ -name notify_Weaved*)
+for channel in $channels; do
+	echo -n "Sending notification via /usr/bin/"
+	echo $channel | xargs basename
+	$channel 1 "Yo" "ok"
+done
