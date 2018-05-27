@@ -4,6 +4,7 @@
 ## 다른 레퍼런스 주소
 * https://github.com/fbqweasd/DGSW-Autonomous-vehicle-HW __자치차량 하드웨어__
 * https://github.com/fbqweasd/DGSW-Autonomous-vehicle-OpenCV __자치차량 OpenCV__
+* https://github.com/DGSW-Autonomous-vehicle/DGSW-Autonomous-vehicle-OpenCV __Server git hub__
 
 # 자치차량이란?
 자치차량은 __"자율주행 자동차"__ 를 구글 번역기에 돌리고 다시 역번역을 하면 __"차치차량"__ 이라고 번역이 됩니다. 이걸 보고 저희 팀원들은 "자치차량"이라는 이름은 "구글이 준 프로젝트명이다!"라는 생각으로 자치차량을 프로젝트명으로 결정을 했습니다.
