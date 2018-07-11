@@ -1,0 +1,10 @@
+#!/bin/sh -e 
+
+_IP=${hostname -I} || true
+if ["$_IP"]; then
+	printf "My IP address in %s\n" "$_IP"
+fi
+
+./home/pi/DGSW-Autonomous-vehicle-HW/HW_EXE/Buzzer_stop
+
+exit 0
