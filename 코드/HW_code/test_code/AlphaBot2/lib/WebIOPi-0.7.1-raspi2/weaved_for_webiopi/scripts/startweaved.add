@@ -1,3 +1,0 @@
-if [ -f "/etc/init.d/REPLACE_TEXT" ]; then
-   /etc/init.d/REPLACE_TEXT start
-fi
