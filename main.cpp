@@ -50,17 +50,17 @@ void Move_UKC(){
                 break;
 
             case 1: // 오른쪽
-                Move.forward(50,32);
+                Move.forward(65,35);
                 break;
 
             case 2: // 좌파
-                Move.forward(30,50);
+                Move.forward(35,65);
                 break;
             case 3:
-                Move.forward(47,30);
+                Move.forward(65,43);
                 break;
             case 4:
-                Move.forward(32,50);
+                Move.forward(43,65);
                 break;
 
             default:
@@ -68,7 +68,7 @@ void Move_UKC(){
                 Move.stop();
                 return;
         }
-        delay(20);
+        delay(70);
 
     }    
     return;

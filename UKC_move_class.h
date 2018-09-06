@@ -77,6 +77,8 @@ void UKC_move::init_wringPi(){
 //////////////////// 움직임 제어함수 /////////////
 
 void UKC_move::forward(){
+    
+   UKC_move::setSpeed(speed_a,speed_b);
    softPwmWrite(ena,ENA);
    softPwmWrite(enb,ENB);
 
@@ -87,8 +89,16 @@ void UKC_move::forward(){
 }
 
 void UKC_move::forward(int a,int b){
-    setPWM(a,b);
-    UKC_move::forward();
+   setPWM(a,b);
+   
+   softPwmWrite(ena,ENA);
+   softPwmWrite(enb,ENB);
+
+   digitalWrite(ain1,LOW);
+   digitalWrite(ain2,HIGH);
+   digitalWrite(bin1,LOW);
+   digitalWrite(bin2,HIGH);
+  
 }
 
 void UKC_move::stop(){
@@ -145,6 +155,7 @@ void UKC_move::setPWMA(int a){
 void UKC_move::setPWMB(int a){
     ENB = a;
 }
+
 
 void UKC_move::setSpeed(int a,int b){
     UKC_move::stop();

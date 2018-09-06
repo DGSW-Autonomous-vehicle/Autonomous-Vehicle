@@ -1,7 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <vector>
-
 //#include "obstacle.hpp"
 //#include "TL.hpp"
 
@@ -13,7 +12,7 @@ using namespace std;
 
 class Liner {
 private:
-	string file = "image/aaa.jpg";
+	string file = "image/0.jpg";
 	Mat HSV;
 	int roi_height = 380;
 	Size roisize = Size(64, 64);
@@ -28,10 +27,11 @@ private:
 	int C = 320;
 	int golowX = C - D;
 	int gohighX = C + D;
-	/*
-	OpenCV_OBS obs;
-	OpenCV_TL traffic;
-	*/
+	
+  //  OpenCV_OBS obs;
+
+	//OpenCV_TL traffic;
+
 	float radtodegree(float th);
 
 	void drawlines(Mat src, vector<Vec2f> lines, Rect roi);
@@ -52,7 +52,7 @@ private:
 
 	int getCenterline(Mat src);
 
-	int flag_ass(Mat m);
+	//int flag_ass(Mat m);
 
 public:
 	Mat img;
@@ -240,23 +240,22 @@ int Liner::getCenterline(Mat src) {
 }
 
 void Liner::set_flag(Point p) {
-	int AP = 15;
 	if (p.x == -1) {
 		flag = -1;
 		return;
 	}
 	else {
-		if (p.x >= golowX-AP && p.x <= gohighX+ AP) {
+		if (p.x >= golowX && p.x <= gohighX) {
 			flag = 0;
 			return;
 		}
 		else
-			if (p.x < golowX- AP) {
+			if (p.x < golowX) {
 				flag = 2;
 				return;
 			}
 			else
-				if (p.x > gohighX+ AP) {
+				if (p.x > gohighX) {
 					flag = 1;
 					return;
 				}
@@ -269,9 +268,6 @@ int Liner::flag_center(int Tx) {
 	if (Tx == 0) {
 		flag = 0;
 		return 0;
-	}else
-		if (Tx == 1) {
-			return 0;
 	}
 	else {
 		if (Tx >= golowX - 10 && Tx <= gohighX + 10) {
@@ -291,31 +287,13 @@ int Liner::flag_center(int Tx) {
 	}
 	return 0;
 }
-
+/*
 int Liner::flag_ass(Mat m) {
-
-	Rect Roii = Rect(Point(C - 30, 260), Point(C + 30, 380));
-	//rectangle(m,Roii, Scalar(255, 255, 255));
-	//imshow("a", m);
-	Mat h = m(Roii);
-	Mat p;
-	cvtColor(h, p, COLOR_BGR2HSV);
-	int cnt = 0;
-	for (int y = 0; y < 60; y++) {
-		for (int i = 0; i < 60; i++) {
-			if (p.at<Vec3b>(y, i)[1] > 100) {
-				cnt++;
-			}
-			if (cnt > 80) {
-				return 1;
-				cout << "object" << endl;
-				break;
-			}
-		}
-	}
-	return 0;
+rectangle(m,Rect(Point(),Point()), Scalar(0, 0, 0));
+imshow("image", img);
+return 0;
 }
-
+*/
 void Liner::startLiner() {
 	vector<Point> points;
 	vector<Vec2f> line_1;
@@ -338,22 +316,10 @@ void Liner::startLiner() {
 		//img = imread(file);
 
 		TX = getCenterline(img);
+ 	//	obs.setResources(img, Rect(C - 60, 240, C  + 60, 400));
+//		traffic.setImage(img);
 
-		if (flag_ass(img)) {
-			flag = -1;
-			cout << "ass";
-			waitKey(30);
-			continue;
-		}
-
-		/*
-		if(TX != 0){
-		obs.setResources(img, Rect(C - 60, 240, C  + 60, 400));
-		}
-		traffic.setImage(img);
-
-		int lightflag = traffic.getLightInfo(LIGHT_VERTICAL);
-		*/
+//		int lightflag = traffic.getLightInfo(LIGHT_VERTICAL);
 		line_1 = getlines(img, 100, 200, Roi1, modes);
 		line_2 = getlines(img, 100, 200, Roi2, modes);
 
@@ -448,6 +414,7 @@ void Liner::startLiner() {
 				}
 			}
 		}
+
 		if (flag_center(TX)) {
 			//			cout << flag << endl;
 			//			imshow("aaaaaaa",img);
@@ -456,16 +423,18 @@ void Liner::startLiner() {
 		else {
 			set_flag(Avgpt);
 		}
-		/*
-		if(obs.hasOBS(Size(10,10), OBS_RELEASE))
-		flag = -1;
+	//	if(obs.hasOBS(Size(10,10), OBS_RELEASE)){
+	//  	    flag = -1;
+    //    }
+    //    else{
+    //        flag = 0;
+    //    }
 
-		if(lightflag == -1)
-		flag = -1;
-		else
-		flag = 0;
+	//	if(lightflag == -1)
+    //       flag = -1;
+	//	else
+	//	flag = 0;
 		//center;
-		*/
 		if (modes) {
 			cout << "flag = " << flag << endl;
 			line(img, Point(TX, 0), Point(TX, 480), Scalar(255, 0, 255), 1);
@@ -482,7 +451,7 @@ void Liner::startLiner() {
 
 		waitKey(60);
 		//imshow("image", img);
-		//cout << "flag = " << flag << endl;
+		cout << "flag = " << flag << endl;
 	}
 }
 /*
