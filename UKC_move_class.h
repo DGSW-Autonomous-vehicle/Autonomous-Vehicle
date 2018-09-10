@@ -18,7 +18,7 @@
 #define enb 25
 
 //회전 속도 PWM 값
-#define speed_spin 20
+#define speed_spin 25
 
 using namespace std;
 
@@ -29,8 +29,8 @@ class UKC_move{
         char ENA;
         char ENB;
 
-        int speed_a = 100;
-        int speed_b = 100;
+        int speed_a = 70;
+        int speed_b = 70;
 
     public:
         UKC_move(){
